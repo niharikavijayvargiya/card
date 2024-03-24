@@ -1,1 +1,154 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            margin-top: 10.5rem;
+            display: none;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .field {
+            display: flex;
+            justify-content: space-between;
+            /* border: 1px solid red; */
+            margin-top: 10px;
+        }
+
+        .field * {
+            /* border: 1px solid red; */
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="info-card">
+            <h1>User Information Card</h1>
+            <div id="user-info">
+                <div class="field">
+                    <span class="label">First Name:</span>
+                    <span id="firstName"></span>
+                </div>
+                <div class="field">
+                    <span class="label">Last Name:</span>
+                    <span id="lastName"></span>
+                </div>
+                <div class="field">
+                    <span class="label">Country:</span>
+                    <span id="country"></span>
+                </div>
+                <div class="field">
+                    <span class="label">Phone Number:</span>
+                    <span id="phoneNumber"></span>
+                </div>
+                <div class="field">
+                    <span class="label">State:</span>
+                    <span id="state"></span>
+                </div>
+                <div class="field">
+                    <span class="label">City:</span>
+                    <span id="city"></span>
+                </div>
+                <div class="field">
+                    <span class="label">Village:</span>
+                    <span id="village"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.querySelector('.container');
+        const firstName = document.getElementById('firstName');
+        const lastName = document.getElementById('lastName');
+        const country = document.getElementById('country');
+        const phoneNumber = document.getElementById('phoneNumber');
+        const state = document.getElementById('state');
+        const city = document.getElementById('city');
+        const village = document.getElementById('village');
+
+        const updateData = () => {
+            let fName = prompt('Enter your first name');
+            let lName = prompt('Enter your last name');
+            let countryValue = prompt('Enter your country');
+            let phoneNumberValue = prompt('Enter your phone number');
+            let stateValue = prompt('Enter your state');
+            let cityValue = prompt('Enter your city');
+            let villageValue = prompt('Enter your village');
+
+            container.style.display = 'block';
+
+            let obj = {
+                fName,
+                lName,
+                countryValue,
+                phoneNumberValue,
+                stateValue,
+                cityValue,
+                villageValue
+            }
+
+            localStorage.setItem('info', JSON.stringify(obj));
+
+            firstName.innerHTML = fName;
+            lastName.innerHTML = lName;
+            country.innerHTML = countryValue;
+            phoneNumber.innerHTML = phoneNumberValue;
+            state.innerHTML = stateValue;
+            city.innerHTML = cityValue;
+            village.innerHTML = villageValue;
+        }
+
+
+        window.onload = () => {
+            let data = localStorage.getItem('info');
+
+            if (data) {
+                container.style.display = 'block';
+                data = JSON.parse(data);
+                firstName.innerHTML = data.fName;
+                lastName.innerHTML = data.lName;
+                country.innerHTML = data.countryValue;
+                phoneNumber.innerHTML = data.phoneNumberValue;
+                state.innerHTML = data.stateValue;
+                city.innerHTML = data.cityValue;
+                village.innerHTML = data.villageValue;
+
+            } else {
+                updateData();
+            }
+        }
+    </script>
+
+</body>
+
+</html>
